@@ -1,0 +1,52 @@
+# A text file with all of the tables in the database
+
+Neurons:
+
+neuron (neuron_id)
+neuron_cell_type (neuron_id, cell_type)
+neuron_exp_condition (neuron_id, experiment_condition)
+neuron_pmid (neuron_id, reference_pmid)
+neuron_doi (neuron_id, reference_doi)
+
+Electro:
+
+electro (electro_id, Pmid)
+electro_pub (Pmid)
+
+Models:
+
+models
+
+model_to_currents (model_current_id, model_id)
+model_currents (model_current_id, model_current_name)
+
+model_to_celltypes (model_id, model_celltypes_id)
+model_celltypes (model_celltype_id)
+
+model_to_types (model_type_id, model_id)
+model_types (model_type_id)
+
+# don't have data for receptors otherwise
+#receptors (id)
+#parent_receptor_types_df (parent_id)
+
+model_to_concept (model_concept_ids, model_id)
+model_concepts (model_concept_id)
+
+model_to_papers (model_paper_id, model_id)
+model_papers (model_paper_id, model_id)
+
+model_to_implemented (model_implemented_id, model_id
+model_implemented (model_implemented_id)
+
+model_views (model_id)
+
+model_to_region (model_region_id, model_id)
+model_regions (model_region_id)
+
+model_to_transmitter (model_transmitter_id, model_id)
+model_transmitters (model_transmitter_id, neurotrans_class_id)
+neurotrans_classes (neurotrans_class_id)
+
+model_to_species (model_species_id, model_id)
+model_species (model_species_id)
