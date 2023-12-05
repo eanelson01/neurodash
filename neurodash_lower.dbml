@@ -1,9 +1,10 @@
 Project neurodash {
-  database_type: 'PostgreSQL'
-  Note: '''
-    # NeuroDash Dashboard
-    A dashboard to display data from NeuroMorpho, NeuroElectro, and ModelDB
-  '''
+  database_type: 'postgresql'
+  note:
+    '''
+    # neurodash dashboard
+    a dashboard to display data from neuromorpho, neuroelectro, and modeldb
+    '''
 }
 Table neuron as n {
 neuron_id int [pk]
@@ -41,10 +42,10 @@ max_age varchar
 min_weight varchar
 max_weight varchar
 png_url varchar
-physical_Integrity varchar
-_links.self.href varchar
-_links.measurements.href varchar
-_links.persistence_vector.href varchar
+physical_integrity varchar
+_links_self_href varchar
+_links_measurements_href varchar
+_links_persistence_vector_href varchar
 brain_region_len decimal
 primary_brain_region varchar
 secondary_brain_region varchar
@@ -56,10 +57,10 @@ processes int
 neurites int
 att_diameter int
 att_angles int
-att_3D int
+att_3d int
 surface_y decimal
 volume_y decimal
-soma_Surface decimal
+soma_surface decimal
 n_stems decimal
 n_bifs decimal
 n_branch decimal
@@ -67,15 +68,15 @@ width decimal
 height decimal
 depth decimal
 diameter decimal
-eucDistance decimal
-pathDistance decimal
-branch_Order decimal
+eucdistance decimal
+pathdistance decimal
+branch_order decimal
 contraction decimal
 fragmentation decimal
 partition_asymmetry decimal
 pk_classic decimal
 bif_ampl_local decimal
-fractal_Dim decimal
+fractal_dim decimal
 bif_ampl_remote decimal
 length decimal
 }
@@ -97,40 +98,40 @@ reference_doi varchar
 }
 Table electro as e {
 electro_id int [pk]
-Pmid int
-TableID decimal
-NeuronName varchar
-NeuronLongName varchar
-NeuronPrefName varchar
-BrainRegion varchar
-MetadataCurated bool
-Species varchar
-Strain varchar
-ElectrodeType varchar
-PrepType varchar
-JxnPotential varchar
-JxnOffset decimal
-RecTemp decimal
-AnimalAge decimal
-AnimalWeight decimal
-ExternalSolution varchar
-ExternalSolution_conf decimal
-external_0_Mg decimal
-external_0_Ca decimal
-external_0_Na decimal
-external_0_Cl decimal
-external_0_K decimal
-external_0_pH decimal
-InternalSolution varchar
-InternalSolution_conf decimal
-internal_0_Mg decimal
-internal_0_Ca decimal
-internal_0_Na decimal
-internal_0_Cl decimal
-internal_0_K decimal
-internal_0_pH decimal
-MetadataNote varchar
-TableNote varchar
+pmid int
+Tableid decimal
+neuronname varchar
+neuronlongname varchar
+neuronprefname varchar
+brainregion varchar
+metadatacurated bool
+species varchar
+strain varchar
+electrodetype varchar
+preptype varchar
+jxnpotential varchar
+jxnoffset decimal
+rectemp decimal
+animalage decimal
+animalweight decimal
+externalsolution varchar
+externalsolution_conf decimal
+external_0_mg decimal
+external_0_ca decimal
+external_0_na decimal
+external_0_cl decimal
+external_0_k decimal
+external_0_ph decimal
+internalsolution varchar
+internalsolution_conf decimal
+internal_0_mg decimal
+internal_0_ca decimal
+internal_0_na decimal
+internal_0_cl decimal
+internal_0_k decimal
+internal_0_ph decimal
+metadatanote varchar
+tablenote varchar
 rin decimal
 rin_raw decimal
 rin_err decimal
@@ -424,12 +425,12 @@ fahpamprest_err decimal
 fahpamprest_n decimal
 fahpamprest_sd decimal
 }
-Table electro_pub ep {
-Pmid int [pk]
-ArticleID int
-Title varchar
-PubYear int
-LastAuthor varchar
+Table electro_pub as ep {
+pmid int [pk]
+articleid int
+title varchar
+pubyear int
+lastauthor varchar
 }
 Table models as m {
 model_id int [pk]
@@ -440,47 +441,47 @@ ver_date varchar
 class_id int
 gitrepo varchar
 }
-Table model_to_currents {
+Table model_to_currents as mtc {
 model_current_id int [pk]
 model_id int [pk]
 }
-Table model_currents {
+Table model_currents as mc {
 model_current_id int [pk]
 model_current_name varchar
 }
-Table model_to_celltypes {
+Table model_to_celltypes as mtcl {
 model_id int [pk]
 model_celltypes_id int [pk]
 }
-Table model_celltypes {
+Table model_celltypes as mcl {
 model_celltypes_id int [pk]
 name varchar
 electro_id decimal
 description varchar
 neurolex_name varchar
 }
-Table model_to_types {
+Table model_to_types as mtt {
 model_type_id int [pk]
 model_id int [pk]
 }
-Table model_types {
+Table model_types as mt {
 model_type_id int [pk]
 name varchar
 }
-Table model_to_concept {
+Table model_to_concept as mtcp {
 model_id int [pk]
 model_concept_id int [pk]
 }
-Table model_concepts {
+Table model_concepts as mcp {
 model_concept_id int [pk]
 name varchar
 description varchar
 }
-Table model_to_papers {
+Table model_to_papers as mtp {
 model_id int [pk]
 model_paper_id int [pk]
 }
-Table model_papers {
+Table model_papers as mp {
 model_paper_id int
 name varchar
 created varchar
@@ -491,23 +492,23 @@ journal varchar
 doi varchar
 doi_lower varchar
 }
-Table model_to_implemented {
+Table model_to_implemented as mti {
 model_id int [pk]
 model_implemented_id int [pk]
 }
-Table model_implemented {
+Table model_implemented as mi {
 model_implemented_id int [pk]
 model_implemented_name varchar
 }
-Table model_views {
+Table model_views as mv {
 model_id int [pk]
 model_views_name varchar
 }
-Table model_to_region {
+Table model_to_region as mtr {
 model_id int [pk]
 model_region_id int [pk]
 }
-Table model_regions {
+Table model_regions as mr {
 model_region_id int [pk]
 primary_brain_region varchar
 created varchar
@@ -516,11 +517,11 @@ ver_date varchar
 class_id int
 parent varchar
 }
-Table model_to_transmitter {
+Table model_to_transmitter as mtter {
 model_id int [pk]
 model_transmitter_id int [pk]
 }
-Table model_transmitters {
+Table model_transmitters as mter {
 model_transmitter_id int [pk]
 name varchar
 created varchar
@@ -529,15 +530,15 @@ ver_date varchar
 class_id int
 neurotrans_class_id decimal
 }
-Table neurotrans_classes {
+Table neurotrans_classes as nc {
 neurotrans_class_id int [pk]
 neurotrans_class_name varchar
 }
-Table model_to_species {
+Table model_to_species as mts {
 model_id int [pk]
 model_species_id int [pk]
 }
-Table model_species {
+Table model_species as ms {
 model_species_id int [pk]
 model_species_name varchar
 }
@@ -546,5 +547,25 @@ Ref: n.neuron_id < nct.neuron_id
 Ref: n.neuron_id < nec.neuron_id
 Ref: n.neuron_id < np.neuron_id
 Ref: n.neuron_id < nd.neuron_id
-Ref: e.Pmid < ep.Pmid
-Ref: m.model_id < 
+Ref: e.pmid < ep.pmid
+Ref: m.model_id < mtc.model_id
+Ref: m.model_id < mtcl.model_id
+Ref: m.model_id < mtt.model_id
+Ref: m.model_id < mtcp.model_id
+Ref: m.model_id < mtp.model_id
+Ref: m.model_id < mti.model_id
+Ref: m.model_id < mv.model_id
+Ref: m.model_id < mtr.model_id
+Ref: m.model_id < mtter.model_id
+Ref: m.model_id < mts.model_id
+Ref: mtc.model_current_id > mc.model_current_id
+Ref: mtcl.model_celltypes_id > mcl.model_celltypes_id
+Ref: mtt.model_type_id > mt.model_type_id
+Ref: mtcp.model_concept_id > mcp.model_concept_id
+Ref: mtp.model_paper_id > mp.model_paper_id
+Ref: mti.model_implemented_id > mi.model_implemented_id
+Ref: mtr.model_region_id > mr.model_region_id
+Ref: mtter.model_transmitter_id > mter.model_transmitter_id
+Ref: mter.neurotrans_class_id > nc.neurotrans_class_id
+Ref: mts.model_species_id > ms.model_species_id
+Ref: np.reference_pmid - ep.pmid

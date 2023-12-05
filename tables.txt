@@ -21,7 +21,7 @@ model_to_current (model_current_id, model_id)
 model_currents (model_current_id, model_current_name)
 
 model_to_celltypes (model_id, model_celltypes_id)
-model_celltypes (model_celltype_id)
+model_celltypes (model_celltypes_id)
 
 model_to_types (model_type_id, model_id)
 model_types (model_type_id)
@@ -30,7 +30,7 @@ model_types (model_type_id)
 #receptors (id)
 #parent_receptor_types_df (parent_id)
 
-model_to_concept (model_concept_ids, model_id)
+model_to_concept (model_concept_id, model_id)
 model_concepts (model_concept_id)
 
 model_to_papers (model_paper_id, model_id)
@@ -50,3 +50,46 @@ neurotrans_classes (neurotrans_class_id)
 
 model_to_species (model_species_id, model_id)
 model_species (model_species_id)
+
+
+
+Neuron as n
+neuron_cell_type as not
+neuron_exp_condition as nec
+neuron_pmid as np
+neuron_doi as nd
+
+Electro as e
+electro_pub as ep
+
+Models as m
+
+model_to_currents as mtc
+model_currents as mc
+
+model_to_celltypes as mtcl
+model_celltypes as mcl
+
+model_to_types as mtt
+model_types as mt
+
+model_to_concept as mtcp
+model_concepts as mcp
+
+model_to_papers as mtp
+model_papers as mp
+
+model_to_implemented as mti
+model_implemented as mi
+
+model_views as mv
+
+model_to_region as mtr
+model_regions as mr
+
+model_to_transmitter as mtter
+model_transmitters as mter
+neurotrans_classes as nc
+
+model_to_species as mts
+model_specieas as ms
