@@ -17,7 +17,7 @@ Models:
 
 models
 
-model_to_currents (model_current_id, model_id)
+model_to_current (model_current_id, model_id)
 model_currents (model_current_id, model_current_name)
 
 model_to_celltypes (model_id, model_celltypes_id)

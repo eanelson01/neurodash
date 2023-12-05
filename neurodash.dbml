@@ -1,0 +1,551 @@
+Project neurodash {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # NeuroDash Dashboard
+    A dashboard to display data from NeuroMorpho, NeuroElectro, and ModelDB
+  '''
+}
+Table neuron as n {
+neuron_id int [pk]
+neuron_name varchar
+archive varchar
+note varchar
+age_scale varchar
+gender varchar
+age_classification varchar
+species varchar
+strain varchar
+scientific_name varchar
+stain varchar
+protocol varchar
+slicing_direction varchar
+reconstruction_software varchar
+objective_type varchar
+original_format varchar
+magnification varchar
+upload_date varchar
+deposition_date varchar
+shrinkage_reported varchar
+shrinkage_corrected varchar
+reported_value varchar
+reported_xy varchar
+reported_z varchar
+corrected_value varchar
+corrected_xy varchar
+corrected_z varchar
+soma_surface varchar
+surface_x varchar
+volume_x varchar
+slicing_thickness varchar
+min_age varchar
+max_age varchar
+min_weight varchar
+max_weight varchar
+png_url varchar
+physical_Integrity varchar
+_links.self.href varchar
+_links.measurements.href varchar
+_links.persistence_vector.href varchar
+brain_region_len decimal
+primary_brain_region varchar
+secondary_brain_region varchar
+tertiary_brain_region varchar
+dendrites int
+soma int
+axon int
+processes int
+neurites int
+att_diameter int
+att_angles int
+att_3D int
+surface_y decimal
+volume_y decimal
+soma_Surface decimal
+n_stems decimal
+n_bifs decimal
+n_branch decimal
+width decimal
+height decimal
+depth decimal
+diameter decimal
+eucDistance decimal
+pathDistance decimal
+branch_Order decimal
+contraction decimal
+fragmentation decimal
+partition_asymmetry decimal
+pk_classic decimal
+bif_ampl_local decimal
+fractal_Dim decimal
+bif_ampl_remote decimal
+length decimal
+}
+Table neuron_cell_type as nct {
+neuron_id int [pk]
+cell_type varchar
+}
+Table neuron_exp_condition as nec {
+neuron_id int [pk]
+experiment_condition varchar
+}
+Table neuron_pmid as np {
+neuron_id int [pk]
+reference_pmid varchar
+}
+Table neuron_doi as nd {
+neuron_id int [pk]
+reference_doi varchar
+}
+Table electro as e {
+electro_id int [pk]
+Pmid int
+TableID decimal
+NeuronName varchar
+NeuronLongName varchar
+NeuronPrefName varchar
+BrainRegion varchar
+MetadataCurated bool
+Species varchar
+Strain varchar
+ElectrodeType varchar
+PrepType varchar
+JxnPotential varchar
+JxnOffset decimal
+RecTemp decimal
+AnimalAge decimal
+AnimalWeight decimal
+ExternalSolution varchar
+ExternalSolution_conf decimal
+external_0_Mg decimal
+external_0_Ca decimal
+external_0_Na decimal
+external_0_Cl decimal
+external_0_K decimal
+external_0_pH decimal
+InternalSolution varchar
+InternalSolution_conf decimal
+internal_0_Mg decimal
+internal_0_Ca decimal
+internal_0_Na decimal
+internal_0_Cl decimal
+internal_0_K decimal
+internal_0_pH decimal
+MetadataNote varchar
+TableNote varchar
+rin decimal
+rin_raw decimal
+rin_err decimal
+rin_n decimal
+rin_sd decimal
+rin_note varchar
+rmp decimal
+rmp_raw decimal
+rmp_err decimal
+rmp_n decimal
+rmp_sd decimal
+rmp_note varchar
+apthr decimal
+apthr_raw decimal
+apthr_err decimal
+apthr_n decimal
+apthr_sd decimal
+apthr_note varchar
+apamp decimal
+apamp_raw decimal
+apamp_err decimal
+apamp_n decimal
+apamp_sd decimal
+apamp_note varchar
+aphw decimal
+aphw_raw decimal
+aphw_err decimal
+aphw_n decimal
+aphw_sd decimal
+aphw_note varchar
+tau decimal
+tau_raw decimal
+tau_err decimal
+tau_n decimal
+tau_sd decimal
+tau_note varchar
+ahpamp decimal
+ahpamp_raw decimal
+ahpamp_err decimal
+ahpamp_n decimal
+ahpamp_sd decimal
+ahpamp_note varchar
+cap decimal
+cap_raw decimal
+cap_err decimal
+cap_n decimal
+cap_sd decimal
+cap_note varchar
+apwidth decimal
+apwidth_raw decimal
+apwidth_err decimal
+apwidth_n decimal
+apwidth_sd decimal
+apwidth_note varchar
+apfreq decimal
+apfreq_raw decimal
+apfreq_err decimal
+apfreq_n decimal
+apfreq_sd decimal
+apfreq_note varchar
+rheo decimal
+rheo_raw decimal
+rheo_err decimal
+rheo_n decimal
+rheo_sd decimal
+rheo_note varchar
+ahpdur decimal
+ahpdur_raw decimal
+ahpdur_err decimal
+ahpdur_n decimal
+ahpdur_sd decimal
+ahpdur_note varchar
+sagratio decimal
+sagratio_raw decimal
+sagratio_err decimal
+sagratio_n decimal
+sagratio_sd decimal
+sagratio_note varchar
+maxfreq decimal
+maxfreq_raw decimal
+maxfreq_err decimal
+maxfreq_n decimal
+maxfreq_sd decimal
+maxfreq_note varchar
+apriseslope decimal
+apriseslope_raw decimal
+apriseslope_err decimal
+apriseslope_n decimal
+apriseslope_sd decimal
+apriseslope_note varchar
+fahpamp decimal
+fahpamp_raw decimal
+fahpamp_err decimal
+fahpamp_n decimal
+fahpamp_sd decimal
+fahpamp_note varchar
+spontfreq decimal
+spontfreq_raw decimal
+spontfreq_err decimal
+spontfreq_n decimal
+spontfreq_sd decimal
+spontfreq_note varchar
+appeak decimal
+appeak_raw decimal
+appeak_err decimal
+appeak_n decimal
+appeak_sd decimal
+appeak_note varchar
+apriset decimal
+apriset_raw decimal
+apriset_err decimal
+apriset_n decimal
+apriset_sd decimal
+apriset_note varchar
+apdecayslope decimal
+apdecayslope_raw decimal
+apdecayslope_err decimal
+apdecayslope_n decimal
+apdecayslope_sd decimal
+apdecayslope_note varchar
+apdelay decimal
+apdelay_raw decimal
+apdelay_err decimal
+apdelay_n decimal
+apdelay_sd decimal
+apdelay_note varchar
+fislope decimal
+fislope_raw decimal
+fislope_err decimal
+fislope_n decimal
+fislope_sd decimal
+fislope_note varchar
+adratio decimal
+adratio_raw decimal
+adratio_err decimal
+adratio_n decimal
+adratio_sd decimal
+adratio_note varchar
+apamprest decimal
+apamprest_raw decimal
+apamprest_err decimal
+apamprest_n decimal
+apamprest_sd decimal
+apamprest_note varchar
+other decimal
+other_raw decimal
+other_err decimal
+other_n decimal
+other_sd decimal
+other_note varchar
+sagamp decimal
+sagamp_raw decimal
+sagamp_err decimal
+sagamp_n decimal
+sagamp_sd decimal
+sahpamp decimal
+sahpamp_raw decimal
+sahpamp_err decimal
+sahpamp_n decimal
+sahpamp_sd decimal
+sahpamp_note varchar
+apdecayt decimal
+apdecayt_raw decimal
+apdecayt_err decimal
+apdecayt_n decimal
+apdecayt_sd decimal
+apdecayt_note varchar
+accres decimal
+accres_raw decimal
+accres_err decimal
+accres_n decimal
+accres_sd decimal
+accres_note varchar
+adratioinv decimal
+adratioinv_raw decimal
+adratioinv_err decimal
+adratioinv_n decimal
+adratioinv_sd decimal
+adratioinv_note varchar
+adpamp decimal
+adpamp_raw decimal
+adpamp_err decimal
+adpamp_n decimal
+adpamp_sd decimal
+adpamp_note varchar
+ahpamprest decimal
+ahpamprest_raw decimal
+ahpamprest_err decimal
+ahpamprest_n decimal
+ahpamprest_sd decimal
+ahpamprest_note varchar
+mahpamp decimal
+mahpamp_raw decimal
+mahpamp_err decimal
+mahpamp_n decimal
+mahpamp_sd decimal
+mahpamp_note varchar
+fahpdur decimal
+fahpdur_raw decimal
+fahpdur_err decimal
+fahpdur_n decimal
+fahpdur_sd decimal
+fahpdur_note varchar
+ahpvolt decimal
+ahpvolt_raw decimal
+ahpvolt_err decimal
+ahpvolt_n decimal
+ahpvolt_sd decimal
+ahpvolt_note varchar
+sahpdur decimal
+sahpdur_raw decimal
+sahpdur_err decimal
+sahpdur_n decimal
+sahpdur_sd decimal
+sahpdur_note varchar
+celldiam decimal
+celldiam_raw decimal
+celldiam_err decimal
+celldiam_n decimal
+celldiam_sd decimal
+celldiam_note varchar
+adpctother decimal
+adpctother_raw decimal
+adpctother_err decimal
+adpctother_n decimal
+adpctother_sd decimal
+adpctother_note varchar
+adpct decimal
+adpct_raw decimal
+adpct_err decimal
+adpct_n decimal
+adpct_sd decimal
+adpct_note varchar
+adpctminus decimal
+adpctminus_raw decimal
+adpctminus_err decimal
+adpctminus_n decimal
+adpctminus_sd decimal
+adpctminus_note varchar
+surfarea decimal
+surfarea_raw decimal
+surfarea_err decimal
+surfarea_n decimal
+surfarea_sd decimal
+mahpdur decimal
+mahpdur_raw decimal
+mahpdur_err decimal
+mahpdur_n decimal
+mahpdur_sd decimal
+adratiominus decimal
+adratiominus_raw decimal
+adratiominus_err decimal
+adratiominus_n decimal
+adratiominus_sd decimal
+adratiominus_note varchar
+adpctinv decimal
+adpctinv_raw decimal
+adpctinv_err decimal
+adpctinv_n decimal
+adpctinv_sd decimal
+adpdur decimal
+adpdur_raw decimal
+adpdur_err decimal
+adpdur_n decimal
+adpdur_sd decimal
+fahpvolt decimal
+fahpvolt_raw decimal
+fahpvolt_err decimal
+fahpvolt_n decimal
+fahpvolt_sd decimal
+fahpvolt_note varchar
+mahpamprest decimal
+mahpamprest_raw decimal
+mahpamprest_err decimal
+mahpamprest_n decimal
+mahpamprest_sd decimal
+apamptrough decimal
+apamptrough_raw decimal
+apamptrough_err decimal
+apamptrough_n decimal
+apamptrough_sd decimal
+apamptrough_note varchar
+sahpamprest decimal
+sahpamprest_raw decimal
+sahpamprest_err decimal
+sahpamprest_n decimal
+sahpamprest_sd decimal
+fahpamprest decimal
+fahpamprest_raw decimal
+fahpamprest_err decimal
+fahpamprest_n decimal
+fahpamprest_sd decimal
+}
+Table electro_pub ep {
+Pmid int [pk]
+ArticleID int
+Title varchar
+PubYear int
+LastAuthor varchar
+}
+Table models as m {
+model_id int [pk]
+name varchar
+created varchar
+ver_number int
+ver_date varchar
+class_id int
+gitrepo varchar
+}
+Table model_to_currents {
+model_current_id int [pk]
+model_id int [pk]
+}
+Table model_currents {
+model_current_id int [pk]
+model_current_name varchar
+}
+Table model_to_celltypes {
+model_id int [pk]
+model_celltypes_id int [pk]
+}
+Table model_celltypes {
+model_celltypes_id int [pk]
+name varchar
+electro_id decimal
+description varchar
+neurolex_name varchar
+}
+Table model_to_types {
+model_type_id int [pk]
+model_id int [pk]
+}
+Table model_types {
+model_type_id int [pk]
+name varchar
+}
+Table model_to_concept {
+model_id int [pk]
+model_concept_id int [pk]
+}
+Table model_concepts {
+model_concept_id int [pk]
+name varchar
+description varchar
+}
+Table model_to_papers {
+model_id int [pk]
+model_paper_id int [pk]
+}
+Table model_papers {
+model_paper_id int
+name varchar
+created varchar
+title varchar
+pubmed varchar
+year varchar
+journal varchar
+doi varchar
+doi_lower varchar
+}
+Table model_to_implemented {
+model_id int [pk]
+model_implemented_id int [pk]
+}
+Table model_implemented {
+model_implemented_id int [pk]
+model_implemented_name varchar
+}
+Table model_views {
+model_id int [pk]
+model_views_name varchar
+}
+Table model_to_region {
+model_id int [pk]
+model_region_id int [pk]
+}
+Table model_regions {
+model_region_id int [pk]
+primary_brain_region varchar
+created varchar
+ver_number int
+ver_date varchar
+class_id int
+parent varchar
+}
+Table model_to_transmitter {
+model_id int [pk]
+model_transmitter_id int [pk]
+}
+Table model_transmitters {
+model_transmitter_id int [pk]
+name varchar
+created varchar
+ver_number int
+ver_date varchar
+class_id int
+neurotrans_class_id decimal
+}
+Table neurotrans_classes {
+neurotrans_class_id int [pk]
+neurotrans_class_name varchar
+}
+Table model_to_species {
+model_id int [pk]
+model_species_id int [pk]
+}
+Table model_species {
+model_species_id int [pk]
+model_species_name varchar
+}
+
+Ref: n.neuron_id < nct.neuron_id
+Ref: n.neuron_id < nec.neuron_id
+Ref: n.neuron_id < np.neuron_id
+Ref: n.neuron_id < nd.neuron_id
+Ref: e.Pmid < ep.Pmid
+Ref: m.model_id < 
