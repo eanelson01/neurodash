@@ -92,4 +92,30 @@ model_transmitters as mter
 neurotrans_classes as nc
 
 model_to_species as mts
-model_specieas as ms
+model_species as ms
+
+[{'key': 'rmp', 'value': 'resting membrane potential'},
+ {'key': 'apthr', 'value': 'spike threshold'},
+ {'key': 'apamp', 'value': 'spike amplitude'},
+ {'key': 'apwidth', 'value': 'spike width'},
+ {'key': 'rheo', 'value': 'rheobase'},
+ {'key': 'rin', 'value': 'input resistance'},
+ {'key': 'celldiam', 'value': 'cell diameter'},
+ {'key': 'cap', 'value': 'cell capacitance'},
+ {'key': 'aphw', 'value': 'spike half-width'},
+ {'key': 'tau', 'value': 'membrane time constant'},
+ {'key': 'apamprest', 'value': 'spike amplitude from resting'},
+ {'key': 'apfreq', 'value': 'firing frequency'},
+ {'key': 'mahpdur', 'value': 'medium AHP duration'},
+ {'key': 'ahpdur', 'value': 'AHP duration'},
+ {'key': 'ahpamp', 'value': 'AHP amplitude'},
+ {'key': 'appeak', 'value': 'spike peak'},
+ {'key': 'sagratio', 'value': 'sag ratio'},
+ {'key': 'accres', 'value': 'access resistance'},
+ {'key': 'sahpamp', 'value': 'slow AHP amplitude'},
+ {'key': 'sagamp', 'value': 'sag amplitude'},
+ {'key': 'other', 'value': 'other'},
+ {'key': 'fahpamp', 'value': 'fast AHP amplitude'},
+ {'key': 'spontfreq', 'value': 'spontaneous firing rate'},
+ {'key': 'ahpvolt', 'value': 'AHP voltage'},
+ {'key': 'adpamp', 'value': 'ADP amplitude'}]

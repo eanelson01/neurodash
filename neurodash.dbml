@@ -1,12 +1,13 @@
 Project neurodash {
-  database_type: 'PostgreSQL'
-  Note: '''
-    # NeuroDash Dashboard
-    A dashboard to display data from NeuroMorpho, NeuroElectro, and ModelDB
-  '''
+  database_type: 'postgresql'
+  note:
+    '''
+    # Neurodash dashboard database
+    This is a database that collects data from NeuroMorpho, NeuroElectro, and ModelDB. The origin of information in each table is given by the prefix "neuron" for NeuroMorpho, "electro" for NeuroElectro, and "model" for ModelDB.
+    '''
 }
 Table neuron as n {
-neuron_id int [pk]
+neuron_id int [pk, note: 'A unique identifier for each neuron found in the NeuroMorhpho data set']
 neuron_name varchar
 archive varchar
 note varchar
@@ -41,169 +42,170 @@ max_age varchar
 min_weight varchar
 max_weight varchar
 png_url varchar
-physical_Integrity varchar
-_links.self.href varchar
-_links.measurements.href varchar
-_links.persistence_vector.href varchar
+physical_integrity varchar
+_links_self_href varchar
+_links_measurements_href varchar
+_links_persistence_vector_href varchar
 brain_region_len decimal
 primary_brain_region varchar
 secondary_brain_region varchar
 tertiary_brain_region varchar
-dendrites int
-soma int
-axon int
-processes int
-neurites int
-att_diameter int
-att_angles int
-att_3D int
+dendrites int [note: "1 if dendrites are included in reconstruction, 0 o.w."]
+soma int [note: "1 if soma is included in reconstruction, 0 o.w."]
+axon int [note: "1 if axons are included in reconstruction, 0 o.w."]
+processes int [note: "1 if proceses are included in reconstruction, 0 o.w."]
+neurites int [note: "1 if neurites are included in reconstruction, 0 o.w."]
+att_diameter int [note: "1 if diameter are included in reconstruction, 0 o.w."]
+att_angles int [note: "1 if angles are included in reconstruction, 0 o.w."]
+att_3d int [note: "1 if 3d view is included in reconstruction, 0 o.w."]
 surface_y decimal
 volume_y decimal
-soma_Surface decimal
-n_stems decimal
-n_bifs decimal
-n_branch decimal
+soma_surface decimal
+n_stems decimal [note: "number of stems"]
+n_bifs decimal [note: "number of bifurcations, 0 o.w."]
+n_branch decimal [note: "number of branches, 0 o.w."]
 width decimal
 height decimal
 depth decimal
 diameter decimal
-eucDistance decimal
-pathDistance decimal
-branch_Order decimal
+eucdistance decimal
+pathdistance decimal
+branch_order decimal
 contraction decimal
 fragmentation decimal
 partition_asymmetry decimal
 pk_classic decimal
 bif_ampl_local decimal
-fractal_Dim decimal
+fractal_dim decimal
 bif_ampl_remote decimal
 length decimal
+note: "Stores data related to each unique Neuron reconstruction found in NeuroMorpho"
 }
 Table neuron_cell_type as nct {
-neuron_id int [pk]
-cell_type varchar
+neuron_id int [pk, note: 'A unique identifier for each neuron found in the NeuroMorhpho data set']
+cell_type varchar [pk]
+note: "Maps neuron_ids to their multiple cell types"
 }
 Table neuron_exp_condition as nec {
 neuron_id int [pk]
-experiment_condition varchar
+experiment_condition varchar [pk]
+note: "Maps neuron_ids to their experimental conditions"
 }
-Table neuron_pmid as np {
+Table neuron_pub as np {
 neuron_id int [pk]
-reference_pmid varchar
-}
-Table neuron_doi as nd {
-neuron_id int [pk]
-reference_doi varchar
+reference_pmid varchar [pk, note: 'The PMID of the reference paper for a given Neuron in NeuroMorpho']
+reference_doi varchar [note: 'The DOI of the reference paper for a given Neuron in NeuroMorpho']
+note: "Publications for each neuron_id"
 }
 Table electro as e {
-electro_id int [pk]
-Pmid int
-TableID decimal
-NeuronName varchar
-NeuronLongName varchar
-NeuronPrefName varchar
-BrainRegion varchar
-MetadataCurated bool
-Species varchar
-Strain varchar
-ElectrodeType varchar
-PrepType varchar
-JxnPotential varchar
-JxnOffset decimal
-RecTemp decimal
-AnimalAge decimal
-AnimalWeight decimal
-ExternalSolution varchar
-ExternalSolution_conf decimal
-external_0_Mg decimal
-external_0_Ca decimal
-external_0_Na decimal
-external_0_Cl decimal
-external_0_K decimal
-external_0_pH decimal
-InternalSolution varchar
-InternalSolution_conf decimal
-internal_0_Mg decimal
-internal_0_Ca decimal
-internal_0_Na decimal
-internal_0_Cl decimal
-internal_0_K decimal
-internal_0_pH decimal
-MetadataNote varchar
-TableNote varchar
-rin decimal
-rin_raw decimal
-rin_err decimal
-rin_n decimal
-rin_sd decimal
+electro_id int [pk, note: 'A unique identifier for each Neuron found in the NeuroElectro dataset']
+pmid int
+Tableid decimal [note: "ID for table where measurements were pulled from"]
+neuronname varchar
+neuronlongname varchar
+neuronprefname varchar
+brainregion varchar
+metadatacurated bool
+species varchar
+strain varchar
+electrodetype varchar
+preptype varchar
+jxnpotential varchar
+jxnoffset decimal
+rectemp decimal
+animalage decimal
+animalweight decimal
+externalsolution varchar
+externalsolution_conf decimal
+external_0_mg decimal [note: "Concentration of external magnesium"]
+external_0_ca decimal [note: "Concentration of external calcium"]
+external_0_na decimal [note: "Concentration of external sodium"]
+external_0_cl decimal [note: "Concentration of external chlorine"]
+external_0_k decimal [note: "Concentration of external pottasium"]
+external_0_ph decimal [note: "External PH"]
+internalsolution varchar
+internalsolution_conf decimal
+internal_0_mg decimal [note: "Concentration of internal magnesium"]
+internal_0_ca decimal [note: "Concentration of internal calcium"]
+internal_0_na decimal [note: "Concentration of internal sodium"]
+internal_0_cl decimal [note: "Concentration of internal chlorine"]
+internal_0_k decimal [note: "Concentration of internal pottasium"]
+internal_0_ph decimal [note: "Internal ph"]
+metadatanote varchar
+tablenote varchar
+rin decimal [note: "input restistance"]
+rin_raw decimal [note: "raw indicates the raw measure for a given measurement"]
+rin_err decimal [note: "err indicates the error for a given measurement"]
+rin_n decimal [note: "n indicates the sample size for a given measurement"]
+rin_sd decimal [note: "sd indicates the standard deviation for a given measurement"]
 rin_note varchar
-rmp decimal
+rmp decimal [note: "resting membrane potential"]
 rmp_raw decimal
 rmp_err decimal
 rmp_n decimal
 rmp_sd decimal
 rmp_note varchar
-apthr decimal
+apthr decimal [note: "spike threshold"]
 apthr_raw decimal
 apthr_err decimal
 apthr_n decimal
 apthr_sd decimal
 apthr_note varchar
-apamp decimal
+apamp decimal [note: "spike amplitude"]
 apamp_raw decimal
 apamp_err decimal
 apamp_n decimal
 apamp_sd decimal
 apamp_note varchar
-aphw decimal
-aphw_raw decimal
+aphw decimal [note: "spike half-width"]
+aphw_raw decimal 
 aphw_err decimal
 aphw_n decimal
 aphw_sd decimal
 aphw_note varchar
-tau decimal
+tau decimal [note: "membrane time constant"]
 tau_raw decimal
 tau_err decimal
 tau_n decimal
 tau_sd decimal
 tau_note varchar
-ahpamp decimal
+ahpamp decimal [note: "AHP amplitude"]
 ahpamp_raw decimal
 ahpamp_err decimal
 ahpamp_n decimal
 ahpamp_sd decimal
 ahpamp_note varchar
-cap decimal
+cap decimal [note: "cell capacitance"]
 cap_raw decimal
 cap_err decimal
 cap_n decimal
 cap_sd decimal
 cap_note varchar
-apwidth decimal
+apwidth decimal [note: "spike width"]
 apwidth_raw decimal
 apwidth_err decimal
 apwidth_n decimal
 apwidth_sd decimal
 apwidth_note varchar
-apfreq decimal
+apfreq decimal [note: "firing frequency"]
 apfreq_raw decimal
 apfreq_err decimal
 apfreq_n decimal
 apfreq_sd decimal
 apfreq_note varchar
-rheo decimal
+rheo decimal [note: "rheobas"]
 rheo_raw decimal
 rheo_err decimal
 rheo_n decimal
 rheo_sd decimal
 rheo_note varchar
-ahpdur decimal
+ahpdur decimal [note: "AHP duration"]
 ahpdur_raw decimal
 ahpdur_err decimal
 ahpdur_n decimal
 ahpdur_sd decimal
 ahpdur_note varchar
-sagratio decimal
+sagratio decimal [note: "sag ratio"]
 sagratio_raw decimal
 sagratio_err decimal
 sagratio_n decimal
@@ -221,19 +223,19 @@ apriseslope_err decimal
 apriseslope_n decimal
 apriseslope_sd decimal
 apriseslope_note varchar
-fahpamp decimal
+fahpamp decimal [note: "fast AHP amplitude"]
 fahpamp_raw decimal
 fahpamp_err decimal
 fahpamp_n decimal
 fahpamp_sd decimal
 fahpamp_note varchar
-spontfreq decimal
+spontfreq decimal [note: 'spontaneous firing rate']
 spontfreq_raw decimal
 spontfreq_err decimal
 spontfreq_n decimal
 spontfreq_sd decimal
 spontfreq_note varchar
-appeak decimal
+appeak decimal [note: 'spike peak']
 appeak_raw decimal
 appeak_err decimal
 appeak_n decimal
@@ -245,31 +247,31 @@ apriset_err decimal
 apriset_n decimal
 apriset_sd decimal
 apriset_note varchar
-apdecayslope decimal
+apdecayslope decimal [note: 'AP decay slope']
 apdecayslope_raw decimal
 apdecayslope_err decimal
 apdecayslope_n decimal
 apdecayslope_sd decimal
 apdecayslope_note varchar
-apdelay decimal
+apdelay decimal [note: 'AP delay']
 apdelay_raw decimal
 apdelay_err decimal
 apdelay_n decimal
 apdelay_sd decimal
 apdelay_note varchar
-fislope decimal
+fislope decimal 
 fislope_raw decimal
 fislope_err decimal
 fislope_n decimal
 fislope_sd decimal
 fislope_note varchar
-adratio decimal
+adratio decimal 
 adratio_raw decimal
 adratio_err decimal
 adratio_n decimal
 adratio_sd decimal
 adratio_note varchar
-apamprest decimal
+apamprest decimal [note: 'spike amplitude from resting']
 apamprest_raw decimal
 apamprest_err decimal
 apamprest_n decimal
@@ -281,12 +283,12 @@ other_err decimal
 other_n decimal
 other_sd decimal
 other_note varchar
-sagamp decimal
+sagamp decimal [note: 'sag amplitude']
 sagamp_raw decimal
 sagamp_err decimal
 sagamp_n decimal
 sagamp_sd decimal
-sahpamp decimal
+sahpamp decimal [note: 'slow AHP amplitude']
 sahpamp_raw decimal
 sahpamp_err decimal
 sahpamp_n decimal
@@ -298,55 +300,55 @@ apdecayt_err decimal
 apdecayt_n decimal
 apdecayt_sd decimal
 apdecayt_note varchar
-accres decimal
+accres decimal [note: 'access resistence']
 accres_raw decimal
 accres_err decimal
 accres_n decimal
 accres_sd decimal
 accres_note varchar
-adratioinv decimal
+adratioinv decimal 
 adratioinv_raw decimal
 adratioinv_err decimal
 adratioinv_n decimal
 adratioinv_sd decimal
 adratioinv_note varchar
-adpamp decimal
+adpamp decimal [note: 'ADP amplitude']
 adpamp_raw decimal
 adpamp_err decimal
 adpamp_n decimal
 adpamp_sd decimal
 adpamp_note varchar
-ahpamprest decimal
+ahpamprest decimal [note: 'AHP amplitude from resting']
 ahpamprest_raw decimal
 ahpamprest_err decimal
 ahpamprest_n decimal
 ahpamprest_sd decimal
 ahpamprest_note varchar
-mahpamp decimal
+mahpamp decimal [note: 'Medium AHP']
 mahpamp_raw decimal
 mahpamp_err decimal
 mahpamp_n decimal
 mahpamp_sd decimal
 mahpamp_note varchar
-fahpdur decimal
+fahpdur decimal [note: 'Fast AHP duration']
 fahpdur_raw decimal
 fahpdur_err decimal
 fahpdur_n decimal
 fahpdur_sd decimal
 fahpdur_note varchar
-ahpvolt decimal
+ahpvolt decimal [note: 'AHP Voltage']
 ahpvolt_raw decimal
 ahpvolt_err decimal
 ahpvolt_n decimal
 ahpvolt_sd decimal
 ahpvolt_note varchar
-sahpdur decimal
+sahpdur decimal [note: 'Slow AHP duration']
 sahpdur_raw decimal
 sahpdur_err decimal
 sahpdur_n decimal
 sahpdur_sd decimal
 sahpdur_note varchar
-celldiam decimal
+celldiam decimal [note: 'cell diameter']
 celldiam_raw decimal
 celldiam_err decimal
 celldiam_n decimal
@@ -358,7 +360,7 @@ adpctother_err decimal
 adpctother_n decimal
 adpctother_sd decimal
 adpctother_note varchar
-adpct decimal
+adpct decimal 
 adpct_raw decimal
 adpct_err decimal
 adpct_n decimal
@@ -391,12 +393,12 @@ adpctinv_raw decimal
 adpctinv_err decimal
 adpctinv_n decimal
 adpctinv_sd decimal
-adpdur decimal
+adpdur decimal [note: 'ADP duration']
 adpdur_raw decimal
 adpdur_err decimal
 adpdur_n decimal
 adpdur_sd decimal
-fahpvolt decimal
+fahpvolt decimal [note: 'fast AHP voltage']
 fahpvolt_raw decimal
 fahpvolt_err decimal
 fahpvolt_n decimal
@@ -423,128 +425,165 @@ fahpamprest_raw decimal
 fahpamprest_err decimal
 fahpamprest_n decimal
 fahpamprest_sd decimal
+note: 'Stores data for each unqiue neuron in NeuroElectro dataset. Acronym columns with no note did not have a translation in NeuroElectro dataset.'
 }
-Table electro_pub ep {
-Pmid int [pk]
-ArticleID int
-Title varchar
-PubYear int
-LastAuthor varchar
+Table electro_pub as ep {
+pmid int [pk]
+articleid int
+title varchar
+pubyear int
+lastauthor varchar
+note: 'Stores data for the unique publications in NeuroElectro dataset'
 }
 Table models as m {
-model_id int [pk]
+model_id int [pk, note: 'A unique identifier for each model in the ModelDB dataset']
 name varchar
 created varchar
-ver_number int
-ver_date varchar
+ver_number int [note: 'Version number for the model']
+ver_date varchar [note: 'Version date']
 class_id int
-gitrepo varchar
+gitrepo boolean [note: 'True\False\None if there is an accompanying GitHub Repository']
+model_species_name varcher [note: 'Name of the species examined by the model']
+note: 'Stores data for unique models in ModelDB dataset'
 }
-Table model_to_currents {
+Table model_to_current as mtc {
+model_current_id int [pk, note: 'A unique identifier for each current in the ModelDB dataset']
+model_id int [pk]
+note: 'Maps models to currents'
+}
+Table model_currents as mc {
 model_current_id int [pk]
-model_id int [pk]
+model_current_name varchar [note: 'A string of the currents involved in the model']
+note: 'Stores data on unique currents found in ModelDB'
 }
-Table model_currents {
-model_current_id int [pk]
-model_current_name varchar
-}
-Table model_to_celltypes {
+Table model_to_celltypes as mtcl {
 model_id int [pk]
+model_celltypes_id int [pk, note: 'A unique identifier for each cell type in the ModelDB dataset']
+note: 'Maps models to celltypes'
+}
+Table model_celltypes as mcl {
 model_celltypes_id int [pk]
+name varchar [note: 'Name of the celltype']
+electro_id decimal [note: 'ID that matches to cells found in electro table']
+description varchar 
+neurolex_name varchar [note: 'Name to match to neurolex dataset, not included in this database']
+note: 'Stores data on unique celltypes in ModelDB dataset'
 }
-Table model_celltypes {
-model_celltypes_id int [pk]
-name varchar
-electro_id decimal
-description varchar
-neurolex_name varchar
+Table model_to_types as mtt {
+model_type_id int [pk, note: 'A unique identifier for each model type in the ModelDB dataset']
+model_id int [pk]
+note: 'Maps models to their model type'
 }
-Table model_to_types {
+Table model_types as mt {
 model_type_id int [pk]
-model_id int [pk]
+name varchar [note: 'name of the model type']
+note: 'Stores data on unique model types in ModelDB dataset'
 }
-Table model_types {
-model_type_id int [pk]
-name varchar
-}
-Table model_to_concept {
+Table model_to_concept as mtcp {
 model_id int [pk]
+model_concept_id int [pk, note: 'A unique identifier for each model concept in the ModelDB dataset']
+note: 'Maps models to their currents'
+}
+Table model_concepts as mcp {
 model_concept_id int [pk]
+name varchar [note: 'name of the model concept']
+description varchar [note: 'description of the model concept']
+note: 'Stores data on unique currents in ModelDB dataset'
 }
-Table model_concepts {
-model_concept_id int [pk]
-name varchar
-description varchar
-}
-Table model_to_papers {
+Table model_to_papers as mtp {
 model_id int [pk]
-model_paper_id int [pk]
+model_paper_id int [pk, note: 'A unique identifier for each paper in the ModelDB dataset']
+note: 'Maps models to papers'
 }
-Table model_papers {
+Table model_papers as mp {
 model_paper_id int
-name varchar
+name varchar [note: 'Authors of the paper']
 created varchar
 title varchar
-pubmed varchar
+pubmed varchar 
 year varchar
 journal varchar
 doi varchar
 doi_lower varchar
+note: 'Stores data on unique papers found in the ModelDB dataset'
 }
-Table model_to_implemented {
+Table model_to_implemented as mti {
 model_id int [pk]
 model_implemented_id int [pk]
+note: 'Maps models to who implemented them'
 }
-Table model_implemented {
+Table model_implemented as mi {
 model_implemented_id int [pk]
-model_implemented_name varchar
+model_implemented_name varchar [note: 'Name of who implemented the model']
+note: 'Stores data on unique implementers in ModelDB dataset'
 }
-Table model_views {
+Table model_views as mv {
 model_id int [pk]
-model_views_name varchar
+model_views_name varchar [note: 'Name of the different model view']
+note: 'Maps models to model views'
 }
-Table model_to_region {
+Table model_to_region as mtr {
 model_id int [pk]
 model_region_id int [pk]
+note: 'Maps models to brain regions'
 }
-Table model_regions {
+Table model_regions as mr {
 model_region_id int [pk]
 primary_brain_region varchar
 created varchar
 ver_number int
 ver_date varchar
 class_id int
-parent varchar
+parent varchar [note: 'Name of the parent region']
+note: 'Stores data on unique brain regions in the ModelDB dataset'
 }
-Table model_to_transmitter {
+Table model_to_transmitter as mtter {
 model_id int [pk]
 model_transmitter_id int [pk]
+note: 'Maps models to transmitters'
 }
-Table model_transmitters {
+Table model_transmitters as mter {
 model_transmitter_id int [pk]
-name varchar
+name varchar [note: 'Name of the transmitters']
 created varchar
 ver_number int
 ver_date varchar
-class_id int
+class_id int 
 neurotrans_class_id decimal
+note: 'Stores data on unique neurotransmitters in the ModelDB dataset'
 }
-Table neurotrans_classes {
+Table neurotrans_classes as nc {
 neurotrans_class_id int [pk]
-neurotrans_class_name varchar
-}
-Table model_to_species {
-model_id int [pk]
-model_species_id int [pk]
-}
-Table model_species {
-model_species_id int [pk]
-model_species_name varchar
+neurotrans_class_name varchar [note: 'The broader class title of the neurotransmitter']
+note: 'Stores data on the unique neurotransmitter classes in the ModelDB dataset'
 }
 
 Ref: n.neuron_id < nct.neuron_id
 Ref: n.neuron_id < nec.neuron_id
 Ref: n.neuron_id < np.neuron_id
-Ref: n.neuron_id < nd.neuron_id
-Ref: e.Pmid < ep.Pmid
-Ref: m.model_id < 
+Ref: e.pmid < ep.pmid
+Ref: m.model_id < mtc.model_id
+Ref: m.model_id < mtcl.model_id
+Ref: m.model_id < mtt.model_id
+Ref: m.model_id < mtcp.model_id
+Ref: m.model_id < mtp.model_id
+Ref: m.model_id < mti.model_id
+Ref: m.model_id < mv.model_id
+Ref: m.model_id < mtr.model_id
+Ref: m.model_id < mtter.model_id
+Ref: mtc.model_current_id > mc.model_current_id
+Ref: mtcl.model_celltypes_id > mcl.model_celltypes_id
+Ref: mtt.model_type_id > mt.model_type_id
+Ref: mtcp.model_concept_id > mcp.model_concept_id
+Ref: mtp.model_paper_id > mp.model_paper_id
+Ref: mti.model_implemented_id > mi.model_implemented_id
+Ref: mtr.model_region_id > mr.model_region_id
+Ref: mtter.model_transmitter_id > mter.model_transmitter_id
+Ref: mter.neurotrans_class_id > nc.neurotrans_class_id
+Ref: np.reference_pmid - ep.pmid
+Ref: n.primary_brain_region <> e.brainregion
+Ref: n.primary_brain_region <> mr.primary_brain_region
+Ref: np.reference_pmid - mp.pubmed
+Ref: np.reference_doi - mp.doi_lower
+Ref: n.species <> m.model_species_name
+Ref: e.electro_id < mcl.electro_id
